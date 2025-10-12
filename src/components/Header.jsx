@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import logo from "../assets/images/more/logo1.png";
-
+import logo from "../assets/more/logo1.png";
+import { Link } from "react-router";
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -16,9 +16,9 @@ const Header = () => {
             alt="Espresso Emporium Logo"
             className="w-10 h-10 rounded-full"
           />
-          <h1 className="text-2xl font-rancho tracking-wide">
+          <Link to={"/"} className="text-2xl font-rancho tracking-wide">
             Espresso Emporium
-          </h1>
+          </Link>
         </div>
 
         {/* Center: Navigation Links (hidden on mobile) */}
