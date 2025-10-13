@@ -9,6 +9,7 @@ import CardDetail from "./components/CardDetail.jsx";
 import UpdateCoffee from "./pages/UpdateCoffee.jsx";
 import About from "./pages/About.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
+import ContactPage from "./pages/ContactPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: "*",
         element: <ErrorPage></ErrorPage>,
+      },
+      {
+        path: "/contact",
+        element: <ContactPage></ContactPage>,
       },
     ],
   },
