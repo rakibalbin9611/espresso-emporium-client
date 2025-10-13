@@ -2,7 +2,7 @@ import { Eye, Pencil, Trash2 } from "lucide-react";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
 
-const CoffeeCard = ({ coffee }) => {
+const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
   const { _id, price, name, photo, supplier } = coffee;
 
   const handleDelete = (id) => {
@@ -30,6 +30,9 @@ const CoffeeCard = ({ coffee }) => {
                 text: "Your coffee has been deleted.",
                 icon: "success",
               });
+            // Update UI
+            const remainingCoffees = coffees.filter((cof) => cof._id !== id);
+            setCoffees(remainingCoffees);
           });
       }
     });
@@ -69,9 +72,12 @@ const CoffeeCard = ({ coffee }) => {
         >
           <Eye size={20} />
         </Link>
-        <button className="bg-[#3C3C3C] text-white p-2 rounded-md hover:opacity-90 transition">
+        <Link
+          to={`/updateCoffee/${_id}`}
+          className="bg-[#3C3C3C] text-white p-2 rounded-md hover:opacity-90 transition"
+        >
           <Pencil size={20} />
-        </button>
+        </Link>
         <button
           onClick={() => handleDelete(`${_id}`)}
           className="bg-[#EA4744] text-white p-2 rounded-md hover:opacity-90 transition"

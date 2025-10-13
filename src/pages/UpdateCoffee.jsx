@@ -1,35 +1,37 @@
-import { Link, useNavigate } from "react-router";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const AddCoffee = () => {
+const UpdateCoffee = () => {
+  const coffee = useLoaderData();
+  const { _id, name, price, supplier, taste, category, details, photo } =
+    coffee || {};
   const navigate = useNavigate();
 
-  const handleAddCoffee = (e) => {
+  const handleUpdateCoffee = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
-    const newCoffee = Object.fromEntries(formData.entries());
-    console.log(newCoffee);
+    const updatedCoffee = Object.fromEntries(formData.entries());
+    console.log(updatedCoffee);
 
-    fetch("http://localhost:3000/coffees", {
-      method: "POST",
+    fetch(`http://localhost:3000/coffees/${_id}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(newCoffee),
+      body: JSON.stringify(updatedCoffee),
     })
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);
-        if (data.insertedId) {
+        if (data.modifiedCount > 0) {
           Swal.fire({
-            title: "Coffee added successfully!",
+            title: "Coffee updated successfully!",
             icon: "success",
             draggable: true,
           });
-          navigate("/", { state: { scrollTo: "addedCoffee" } });
-          form.reset();
         }
+        navigate(`/coffees/${_id}`);
       });
   };
 
@@ -43,25 +45,24 @@ const AddCoffee = () => {
             to="/"
             className="flex items-center gap-2 text-2xl text-[#374151] font-semibold hover:text-[#b58973] transition duration-200"
           >
-            <span className="">←</span> Back to home
+            <span>←</span> Back to home
           </Link>
         </div>
 
-        {/* Add Coffee Form */}
+        {/* Update Coffee Form */}
         <div className="bg-[#F4F3F0] py-16 px-6 sm:px-10 md:px-16 rounded-2xl shadow-sm">
           <div className="text-center mb-12 space-y-4">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-[#374151]">
-              Add New Coffee
+              Update Coffee
             </h2>
             <p className="raleway text-base sm:text-lg text-[#1B1A1AB3] max-w-3xl mx-auto">
-              Add your favorite coffee to the collection by filling out the
-              details below. Provide the name, chef, supplier, taste, category,
-              and a photo so that everyone can discover and enjoy it.
+              Update the coffee details below and save your changes. Make sure
+              to provide all the necessary information.
             </p>
           </div>
 
           {/* Form Section */}
-          <form onSubmit={handleAddCoffee} className="raleway space-y-6">
+          <form onSubmit={handleUpdateCoffee} className="raleway space-y-6">
             {/* Grid Inputs */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <fieldset className="fieldset bg-white shadow-sm rounded-xl border border-base-300 p-4">
@@ -71,8 +72,8 @@ const AddCoffee = () => {
                 <input
                   type="text"
                   name="name"
+                  defaultValue={name}
                   className="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-[#D2B48C]"
-                  placeholder="Enter coffee name"
                 />
               </fieldset>
 
@@ -83,8 +84,8 @@ const AddCoffee = () => {
                 <input
                   type="text"
                   name="price"
+                  defaultValue={price}
                   className="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-[#D2B48C]"
-                  placeholder="Enter coffee price"
                 />
               </fieldset>
 
@@ -95,8 +96,8 @@ const AddCoffee = () => {
                 <input
                   type="text"
                   name="supplier"
+                  defaultValue={supplier}
                   className="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-[#D2B48C]"
-                  placeholder="Enter coffee supplier"
                 />
               </fieldset>
 
@@ -107,8 +108,8 @@ const AddCoffee = () => {
                 <input
                   type="text"
                   name="taste"
+                  defaultValue={taste}
                   className="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-[#D2B48C]"
-                  placeholder="Enter coffee taste"
                 />
               </fieldset>
 
@@ -119,8 +120,8 @@ const AddCoffee = () => {
                 <input
                   type="text"
                   name="category"
+                  defaultValue={category}
                   className="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-[#D2B48C]"
-                  placeholder="Enter coffee category"
                 />
               </fieldset>
 
@@ -131,8 +132,8 @@ const AddCoffee = () => {
                 <input
                   type="text"
                   name="details"
+                  defaultValue={details}
                   className="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-[#D2B48C]"
-                  placeholder="Enter coffee details"
                 />
               </fieldset>
             </div>
@@ -145,8 +146,8 @@ const AddCoffee = () => {
               <input
                 type="text"
                 name="photo"
+                defaultValue={photo}
                 className="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-[#D2B48C]"
-                placeholder="Enter photo URL"
               />
             </fieldset>
 
@@ -155,7 +156,7 @@ const AddCoffee = () => {
               type="submit"
               className="btn w-full bg-[#D2B48C] border border-[#331A15] hover:bg-[#b58973] text-[#331A15] font-semibold text-lg rounded-xl transition duration-300"
             >
-              Add Coffee
+              Update Coffee
             </button>
           </form>
         </div>
@@ -164,4 +165,4 @@ const AddCoffee = () => {
   );
 };
 
-export default AddCoffee;
+export default UpdateCoffee;

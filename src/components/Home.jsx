@@ -1,11 +1,24 @@
-import { Link, useLoaderData } from "react-router";
+import { Link, useLoaderData, useLocation } from "react-router";
 import CoffeeCard from "./CoffeeCard";
 import Banner from "./Banner";
 import FeatureSection from "./FeaturesSec";
+import { useEffect, useState } from "react";
 
 const Home = () => {
-  const coffees = useLoaderData();
+  const initialCoffees = useLoaderData();
+  const [coffees, setCoffees] = useState(initialCoffees);
   // console.log(coffees);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.scrollTo === "addedCoffee") {
+      const element = document.getElementById("addCoffee");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
   return (
     <>
       <Banner></Banner>
@@ -25,11 +38,20 @@ const Home = () => {
             </button>
           </Link>
         </div>
-        <div className=" grid grid-cols-1 md:grid-cols-2 gap-6 px-4 mt-12">
+        {/* Add coffee section */}
+        <section
+          id="addCoffee"
+          className=" grid grid-cols-1 md:grid-cols-2 gap-6 px-4 mt-12 "
+        >
           {coffees.map((coffee) => (
-            <CoffeeCard key={coffee._id} coffee={coffee}></CoffeeCard>
+            <CoffeeCard
+              coffees={coffees}
+              setCoffees={setCoffees}
+              key={coffee._id}
+              coffee={coffee}
+            ></CoffeeCard>
           ))}
-        </div>
+        </section>
       </div>
     </>
   );
