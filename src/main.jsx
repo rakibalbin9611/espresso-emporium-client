@@ -10,6 +10,8 @@ import UpdateCoffee from "./pages/UpdateCoffee.jsx";
 import About from "./pages/About.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import ContactPage from "./pages/ContactPage.jsx";
+import Authlayout from "./layouts/Authlayout.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +50,16 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <ContactPage></ContactPage>,
+      },
+    ],
+  },
+  {
+    path: "/auth",
+    element: <Authlayout></Authlayout>,
+    children: [
+      {
+        path: "/auth/login",
+        element: <LoginPage></LoginPage>,
       },
     ],
   },

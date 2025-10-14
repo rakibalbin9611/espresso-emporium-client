@@ -22,7 +22,7 @@ const Header = () => {
         </div>
 
         {/* Center: Navigation Links (hidden on mobile) */}
-        <nav className="hidden lg:flex items-center gap-10 text-lg font-medium">
+        <nav className="hidden lg:flex items-center gap-10 text-lg font-medium raleway">
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -67,9 +67,12 @@ const Header = () => {
 
         {/* Right: Login Button (always visible on large screen) */}
         <div className="hidden lg:block">
-          <button className="bg-[#D2B48C] text-[#331A15] font-semibold px-6 py-2 rounded-xl hover:bg-[#b68c65] transition">
+          <Link
+            to={"/auth/login"}
+            className="bg-[#D2B48C] raleway text-[#331A15] font-semibold px-6 py-2 rounded-xl hover:bg-[#b68c65] transition"
+          >
             Login
-          </button>
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
@@ -84,7 +87,7 @@ const Header = () => {
       {/* Mobile Menu Dropdown */}
       {menuOpen && (
         <div className="lg:hidden bg-[#331A15] text-center py-6 space-y-6 shadow-md z-50">
-          <nav className="flex flex-col gap-4 text-lg font-medium">
+          <nav className="flex flex-col gap-4 text-lg font-medium raleway">
             <NavLink
               to="/"
               onClick={() => setMenuOpen(false)}
@@ -132,7 +135,7 @@ const Header = () => {
           </nav>
 
           {/* Mobile Login Button */}
-          <button className="bg-[#D2B48C] text-[#331A15] font-semibold px-6 py-2 rounded-xl hover:bg-[#b68c65] transition">
+          <button className="bg-[#D2B48C] raleway text-[#331A15] font-semibold px-6 py-2 rounded-xl hover:bg-[#b68c65] transition">
             Login
           </button>
         </div>
