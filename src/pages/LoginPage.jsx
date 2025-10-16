@@ -1,5 +1,5 @@
-import React from "react";
 import { Coffee } from "lucide-react";
+import { Link } from "react-router";
 
 const LoginPage = () => {
   return (
@@ -9,17 +9,17 @@ const LoginPage = () => {
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-2 mb-3">
             <Coffee className="text-[#C69C6D] w-8 h-8" />
-            <h1 className="text-3xl font-rancho text-[#3B2F2F]">
+            <h1 className="text-5xl font-rancho text-[#3B2F2F]">
               Espresso <span className="text-[#C69C6D]">Emporium</span>
             </h1>
           </div>
-          <p className="text-[#3B2F2F]/70 font-raleway text-base">
+          <p className="text-[#3B2F2F]/70 font-raleway raleway text-base mt-4">
             Welcome back! Please sign in to continue.
           </p>
         </div>
 
         {/* Login Form */}
-        <form className="space-y-5">
+        <form className="space-y-5 raleway">
           <div>
             <label className="block text-sm font-medium mb-2 text-[#3B2F2F] font-raleway">
               Email Address
@@ -54,8 +54,8 @@ const LoginPage = () => {
         </form>
 
         {/* Footer Links */}
-        <div className="mt-6 text-center space-y-2">
-          <p className="text-[#3B2F2F]/70 font-raleway text-sm">
+        <div className="mt-6 text-center space-y-2 raleway">
+          <p className="text-[#3B2F2F]/70  text-sm">
             Forgot your password?{" "}
             <a
               href="#"
@@ -64,14 +64,15 @@ const LoginPage = () => {
               Reset here
             </a>
           </p>
-          <p className="text-[#3B2F2F]/70 font-raleway text-sm">
+          <p className="text-[#3B2F2F]/70 text-sm">
             Don’t have an account?{" "}
-            <a
+            <Link
+              to={"/auth/signup"}
               href="#"
               className="text-[#C69C6D] font-semibold hover:underline"
             >
               Create one
-            </a>
+            </Link>
           </p>
         </div>
       </div>
