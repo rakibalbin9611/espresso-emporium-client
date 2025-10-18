@@ -91,6 +91,8 @@ const SignUpPage = () => {
           phone: formData.phone,
           address: formData.address,
           photoURL: formData.photoURL,
+          creationTime: result.user.metadata.creationTime,
+          lastSignInTime: result.user.metadata.lastSignInTime,
         };
         fetch("http://localhost:3000/users", {
           method: "POST",

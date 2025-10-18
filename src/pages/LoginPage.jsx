@@ -2,6 +2,9 @@ import { Coffee } from "lucide-react";
 import { Link } from "react-router";
 
 const LoginPage = () => {
+  const handleSignIn = (e) => {
+    e.preventDefault();
+  };
   return (
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#F4F3F0] to-[#EDE6DA] px-6 py-12">
       <div className="w-full max-w-md bg-white rounded-3xl shadow-xl p-10">
@@ -19,7 +22,7 @@ const LoginPage = () => {
         </div>
 
         {/* Login Form */}
-        <form className="space-y-5 raleway">
+        <form onSubmit={handleSignIn} className="space-y-5 raleway">
           <div>
             <label className="block text-sm font-medium mb-2 text-[#3B2F2F] font-raleway">
               Email Address

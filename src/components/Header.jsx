@@ -63,6 +63,16 @@ const Header = () => {
           >
             Contact
           </NavLink>
+          <NavLink
+            to="/users"
+            className={({ isActive }) =>
+              `hover:text-[#D2B48C] transition ${
+                isActive ? "text-[#D2B48C]" : ""
+              }`
+            }
+          >
+            Community
+          </NavLink>
         </nav>
 
         {/* Right: Login Button (always visible on large screen) */}
@@ -131,6 +141,17 @@ const Header = () => {
               }
             >
               Contact
+            </NavLink>
+            <NavLink
+              to="/users"
+              onClick={() => setMenuOpen(false)}
+              className={({ isActive }) =>
+                `hover:text-[#D2B48C] transition ${
+                  isActive ? "text-[#D2B48C]" : ""
+                }`
+              }
+            >
+              Community
             </NavLink>
           </nav>
 

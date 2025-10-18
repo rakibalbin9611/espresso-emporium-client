@@ -14,6 +14,7 @@ import Authlayout from "./layouts/Authlayout.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import SignUpPage from "./pages/SignUpPage .jsx";
 import AuthProvider from "./contexts/AuthProvider.jsx";
+import Users from "./pages/Users.jsx";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,11 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <ContactPage></ContactPage>,
+      },
+      {
+        path: "/users",
+        loader: () => fetch("http://localhost:3000/users"),
+        element: <Users></Users>,
       },
     ],
   },
