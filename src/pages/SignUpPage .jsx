@@ -126,7 +126,7 @@ const SignUpPage = () => {
 
   return (
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#F4F3F0] to-[#EDE6DA] px-6 py-12">
-      <div className="w-full max-w-md bg-white rounded-3xl shadow-xl p-10">
+      <div className="w-full max-w-xl bg-white rounded-xl shadow-xl p-20">
         {/* Logo + Title */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-2 mb-3">

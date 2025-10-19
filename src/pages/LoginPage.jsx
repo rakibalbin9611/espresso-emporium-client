@@ -1,9 +1,42 @@
 import { Coffee } from "lucide-react";
+import { use } from "react";
 import { Link } from "react-router";
+import { AuthContext } from "../contexts/AuthContext";
 
 const LoginPage = () => {
+  const { signInUser } = use(AuthContext);
   const handleSignIn = (e) => {
     e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    // console.log(email, password);
+
+    // firebase sign in send
+    signInUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+
+        const signInfo = {
+          email,
+          lastSignInTime: result.user.metadata.lastSignInTime,
+        };
+        // update last sign in to the database
+        fetch(`http://localhost:3000/users`, {
+          method: "PATCH",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(signInfo),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("After update", data);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#F4F3F0] to-[#EDE6DA] px-6 py-12">
@@ -30,6 +63,7 @@ const LoginPage = () => {
             <input
               type="email"
               placeholder="Enter your email"
+              name="email"
               className="w-full border border-[#C69C6D]/40 focus:border-[#C69C6D] focus:ring-2 focus:ring-[#C69C6D]/30 rounded-lg px-4 py-3 outline-none transition-all duration-300 shadow-sm"
               required
             />
@@ -41,6 +75,7 @@ const LoginPage = () => {
             </label>
             <input
               type="password"
+              name="password"
               placeholder="Enter your password"
               className="w-full border border-[#C69C6D]/40 focus:border-[#C69C6D] focus:ring-2 focus:ring-[#C69C6D]/30 rounded-lg px-4 py-3 outline-none transition-all duration-300 shadow-sm"
               required
